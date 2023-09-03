@@ -1,4 +1,7 @@
+import requests
+import socket
 from transformers import AutoTokenizer
+from urllib.parse import urlparse
 
 
 def trim_string_to_tokens(input_string, max_tokens):
@@ -12,3 +15,25 @@ def trim_string_to_tokens(input_string, max_tokens):
         return trimmed_string
 
     return input_string
+
+
+def extract_domain(url):
+    parsed_url = urlparse(url)
+    return parsed_url.netloc
+
+
+def get_ip_address(domain):
+    try:
+        ip_address = socket.gethostbyname(domain)
+        return ip_address
+    except Exception:
+        return None
+
+
+def get_geolocation(ip_address):
+    try:
+        response = requests.get(f"https://ipinfo.io/{ip_address}/json")
+        data = response.json()
+        return data
+    except requests.RequestException:
+        return None
