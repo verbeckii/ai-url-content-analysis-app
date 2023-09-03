@@ -1,6 +1,8 @@
-import type { LinksFunction } from "@remix-run/node"
+import { type LinksFunction } from "@remix-run/node"
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from "@remix-run/react"
 import stylesheet from "~/tailwind.css"
+import Header from "~/shared/components/header"
+import ContentExplorer from "~/features/content-explorer/content-explorer"
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: stylesheet }]
 
@@ -14,7 +16,13 @@ export default function App() {
 				<Links />
 			</head>
 			<body>
-				<Outlet />
+				<div className="flex flex-col w-full h-full space-y-3">
+					<Header />
+					<div className="flex grow space-x-3 w-full h-[calc(100%_-_92px)]">
+						<ContentExplorer />
+						<Outlet />
+					</div>
+				</div>
 				<ScrollRestoration />
 				<Scripts />
 				<LiveReload />

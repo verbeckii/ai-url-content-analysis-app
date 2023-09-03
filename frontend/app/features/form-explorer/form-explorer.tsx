@@ -2,7 +2,11 @@ import { Form } from "@remix-run/react"
 
 export default function FormExplorer() {
 	return (
-		<Form method="post" action="/events" className="basis-2/5 shrink-0 grow">
+		<Form
+			method="post"
+			action="http://127.0.0.1:8000/api/url-info"
+			className="basis-2/5 shrink-0 grow"
+		>
 			<div className="bg-white flex flex-col p-5 space-y-6 justify-start rounded-xl h-full">
 				<div className="pt-3 pb-5 border-b border-neutral-200 flex w-full space-x-4 max-h-[95px] min-h-[95px]">
 					<div className="space-y-1.5">
