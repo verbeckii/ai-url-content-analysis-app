@@ -21,6 +21,6 @@ def url_content_analyzer(url: str):
             ]
         )
         reply = generatedChatGPTContent['choices'][0]['message']['content']
-        return {"answer": reply}
+        return reply
     except Exception:
         return 'Invalid URL'

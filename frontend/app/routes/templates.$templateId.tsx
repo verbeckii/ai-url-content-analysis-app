@@ -1,21 +1,14 @@
 import type { ActionArgs } from "@remix-run/node"
-import { json } from "@remix-run/node"
-import { Form } from "@remix-run/react"
-import DocumentExplorer from "~/features/document-explorer/document-explorer"
+import { redirect } from "@remix-run/node"
+import { Form, Outlet } from "@remix-run/react"
+import { removeHttpHttps } from "~/shared/helpers"
 
 export const action = async ({ params, request }: ActionArgs) => {
 	const choosenFeatures = params.templateId
 	const formData = await request.formData()
 	const body = Object.fromEntries(formData)
-	const res = await fetch(`http://127.0.0.1:8000/api/${choosenFeatures}`, {
-		method: "POST",
-		body: JSON.stringify(body),
-		headers: {
-			"Content-Type": "application/json",
-		},
-	})
-	const documentContent = await res.json()
-	return json(documentContent)
+	const url = removeHttpHttps(body.url)
+	return redirect(`/templates/${choosenFeatures}/${url}`)
 }
 
 export default function TemplateForm() {
@@ -44,10 +37,12 @@ export default function TemplateForm() {
 							>
 								<input
 									name="url"
-									type="url"
-									placeholder="https://remix.run/"
+									type="text"
+									placeholder="remix.run"
 									className="outline-none w-full resize-none leading-6"
-								></input>
+									required
+									minLength={4}
+								/>
 							</div>
 						</div>
 					</div>
@@ -61,7 +56,7 @@ export default function TemplateForm() {
 					</div>
 				</div>
 			</Form>
-			<DocumentExplorer />
+			<Outlet />
 		</>
 	)
 }

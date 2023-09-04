@@ -16,7 +16,7 @@ export default function ContentExplorer() {
 								className={({ isActive }) =>
 									isActive ? `bg-pink-500 ${navlinkClass}` : navlinkClass
 								}
-								to={`templates/analyze-url-content`}
+								to={`templates/analyze-url-content/welcome`}
 							>
 								Analyze URL content
 							</NavLink>
@@ -24,7 +24,7 @@ export default function ContentExplorer() {
 								className={({ isActive }) =>
 									isActive ? `bg-pink-500 ${navlinkClass}` : navlinkClass
 								}
-								to={`templates/analyze-url-info`}
+								to={`templates/analyze-url-info/welcome`}
 							>
 								Analyze URL info
 							</NavLink>
